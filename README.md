@@ -45,3 +45,6 @@ Proyecto del grupo2 web pedidos
 </table>
 
 <h1>Normativas sobre el desarrollo</h1>
+El proyecto se desarroyara en PDO con el fichero ya subido en este git </br>
+llamado "conn.php".
+Tambien sera desarroyada con sesiones para poder tener interaccion con la misma.
