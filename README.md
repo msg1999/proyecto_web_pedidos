@@ -16,20 +16,26 @@ Proyecto del grupo2 web pedidos
     <td>
       1
     </td>
+	  <td>Dani</td>
   </tr>
   <tr>
     <td>
       2
     </td>
+	  <td>Pedro</td>
   </tr>
   <tr>
     <td>
-		3
-	</td>
+      3
+</td>
+	  <td>Silvia</td>
 </tr>
 <tr>
 	<td>
 		4
+	</td>
+	<td>
+		Marco
 	</td>
 </tr>
 <tr>
