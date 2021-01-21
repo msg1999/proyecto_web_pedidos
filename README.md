@@ -1,5 +1,4 @@
-# proyecto_web_pedidos
-Proyecto del grupo2 web pedidos
+<h1>Proyecto web pedidos - GRUPO 2 </h1>
 <h1>Asignacion del proyecto</h1>
 <table>
 	<tr>
