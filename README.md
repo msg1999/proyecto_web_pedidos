@@ -28,11 +28,17 @@ Proyecto del grupo2 web pedidos
 	</tr>
 	<tr>
 		<td>5</td>
+		<td></td>
+		<td></td>
 	</tr>
 	<tr>
 		<td>6</td>
+		<td></td>
+		<td></td>
 	</tr>
 	<tr>
 		<td>7</td>
+		<td></td>
+		<td></td>
 	</tr>
 </table>
