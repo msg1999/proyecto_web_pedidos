@@ -19,7 +19,7 @@
 	<tr>
 		<td>1-Login</td>
 		<td>Dani</td>
-		<td>Asignado</td>
+		<td>Finalizado</td>
   	</tr>
   	<tr>
     		<td>2-Realizar pedidos</td>
