@@ -1,5 +1,6 @@
 # proyecto_web_pedidos
 Proyecto del grupo2 web pedidos
+<h1>Asignacion del proyecto</h1>
 <table>
 	<tr>
 		<td>Apartado</td>
@@ -42,3 +43,5 @@ Proyecto del grupo2 web pedidos
 		<td>No asignado</td>
 	</tr>
 </table>
+
+<h1>Normativas sobre el desarrollo</h1>
