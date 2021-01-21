@@ -7,38 +7,38 @@ Proyecto del grupo2 web pedidos
 		<td>Estado</td>
   	</tr>
 	<tr>
-		<td>1</td>
+		<td>1-Login</td>
 		<td>Dani</td>
 		<td>Asignado</td>
   	</tr>
   	<tr>
-    		<td>2</td>
+    		<td>2-Realizar pedidos</td>
 	  	<td>Pedro</td>
 	  	<td>Asignado</td>
   	</tr>
   	<tr>
-    		<td>3</td>
+    		<td>3-Consulta pedidos</td>
 	  	<td>Silvia</td>
 	  	<td>Asignado</td>
 	</tr>
 	<tr>
-		<td>4</td>
+		<td>4-Consulta stock(producto)</td>
 		<td>Marco</td>
 		<td>Asignado</td>
 	</tr>
 	<tr>
-		<td>5</td>
-		<td></td>
-		<td></td>
+		<td>5-Consulta stock(linea producto)</td>
+		<td>-</td>
+		<td>No asignado</td>
 	</tr>
 	<tr>
-		<td>6</td>
-		<td></td>
-		<td></td>
+		<td>6-Consulta unidades totales</td>
+		<td>-</td>
+		<td>No asignado</td>
 	</tr>
 	<tr>
-		<td>7</td>
-		<td></td>
-		<td></td>
+		<td>7-Consulta clientes</td>
+		<td>-</td>
+		<td>No asignado</td>
 	</tr>
 </table>
