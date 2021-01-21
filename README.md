@@ -18,12 +18,12 @@ Proyecto del grupo2 web pedidos
     </td>
   </tr>
   <tr>
-	<td>
-		2
-	</td>
-</tr>
-<tr>
-	<td>
+    <td>
+      2
+    </td>
+  </tr>
+  <tr>
+    <td>
 		3
 	</td>
 </tr>
