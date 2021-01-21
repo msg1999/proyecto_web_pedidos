@@ -55,4 +55,4 @@
 
 <h1>Normativas sobre el desarrollo</h1>
 El proyecto se desarroyara en PDO con el fichero ya subido en este git llamado "conn.php".</br>
-Tambien sera desarroyada con sesiones para poder tener interaccion con la misma.
+Tambien sera desarrollada con sesiones para poder tener interaccion con la misma.
