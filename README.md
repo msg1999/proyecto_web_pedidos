@@ -1,6 +1,5 @@
 <h1>Proyecto web pedidos - GRUPO 2 </h1>
-<h1>Asignacion del proyecto</h1>
-<h2>Integrantes<h2>
+<h1>Integrantes</h1>
 	<ul>
 		<li>BLÁZQUEZ ÁLVAREZ, JORGE</li>
 		<li>CATALINAS BUSTOS, JOSÉ</li>
@@ -9,6 +8,8 @@
 		<li>RANERA MARTÍN, SILVIA</li>
 		<li>SANTIAGO GONZÁLEZ, MARCO (Jefe Equipo)</li>		
 	</ul>
+<h1>Asignacion del proyecto</h1>
+
 <table>
 	<tr>
 		<td>Apartado</td>
