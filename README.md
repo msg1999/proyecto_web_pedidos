@@ -1,12 +1,14 @@
 <h1>Proyecto web pedidos - GRUPO 2 </h1>
 <h1>Asignacion del proyecto</h1>
 <h2>Integrantes<h2>
-	BLÁZQUEZ ÁLVAREZ, JORGE
-	CATALINAS BUSTOS, JOSÉ
-	FERNÁNDEZ GARCÍA, PEDRO
-	GONZÁLEZ CARRETERO, DANIEL
-	RANERA MARTÍN, SILVIA
-	SANTIAGO GONZÁLEZ, MARCO (Jefe Equipo)
+	<ul>
+		<li>BLÁZQUEZ ÁLVAREZ, JORGE</li>
+		<li>CATALINAS BUSTOS, JOSÉ</li>
+		<li>FERNÁNDEZ GARCÍA, PEDRO</li>
+		<li>GONZÁLEZ CARRETERO, DANIEL</li>
+		<li>RANERA MARTÍN, SILVIA</li>
+		<li>SANTIAGO GONZÁLEZ, MARCO (Jefe Equipo)</li>		
+	</ul>
 <table>
 	<tr>
 		<td>Apartado</td>
