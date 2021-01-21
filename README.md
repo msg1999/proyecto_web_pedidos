@@ -12,4 +12,39 @@ Proyecto del grupo2 web pedidos
       Estado
     </td>
   </tr>
+  <tr>
+    <td>
+      1
+    </td>
+  </tr>
+  <tr>
+	<td>
+		2
+	</td>
+</tr>
+<tr>
+	<td>
+		3
+	</td>
+</tr>
+<tr>
+	<td>
+		4
+	</td>
+</tr>
+<tr>
+	<td>
+		5
+	</td>
+</tr>
+<tr>
+	<td>
+		6
+	</td>
+</tr>
+<tr>
+	<td>
+		7
+	</td>
+</tr>
 </table>
