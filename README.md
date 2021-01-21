@@ -6,7 +6,7 @@ Proyecto del grupo2 web pedidos
       Apartado
     </td>
     <td>
-      Asignado
+      Asignaciones
     </td>
     <td>
       Estado
@@ -17,18 +17,21 @@ Proyecto del grupo2 web pedidos
       1
     </td>
 	  <td>Dani</td>
+	  <td>Asignado</td>
   </tr>
   <tr>
     <td>
       2
     </td>
 	  <td>Pedro</td>
+	  <td>Asignado</td>
   </tr>
   <tr>
     <td>
       3
 </td>
 	  <td>Silvia</td>
+	  <td>Asignado</td>
 </tr>
 <tr>
 	<td>
@@ -37,6 +40,7 @@ Proyecto del grupo2 web pedidos
 	<td>
 		Marco
 	</td>
+	<td>Asignado</td>
 </tr>
 <tr>
 	<td>
