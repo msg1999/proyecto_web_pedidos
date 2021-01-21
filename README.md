@@ -1,60 +1,38 @@
 # proyecto_web_pedidos
 Proyecto del grupo2 web pedidos
 <table>
-  <tr>
-    <td>
-      Apartado
-    </td>
-    <td>
-      Asignaciones
-    </td>
-    <td>
-      Estado
-    </td>
-  </tr>
-  <tr>
-    <td>
-      1
-    </td>
-	  <td>Dani</td>
-	  <td>Asignado</td>
-  </tr>
-  <tr>
-    <td>
-      2
-    </td>
-	  <td>Pedro</td>
-	  <td>Asignado</td>
-  </tr>
-  <tr>
-    <td>
-      3
-</td>
-	  <td>Silvia</td>
-	  <td>Asignado</td>
-</tr>
-<tr>
-	<td>
-		4
-	</td>
-	<td>
-		Marco
-	</td>
-	<td>Asignado</td>
-</tr>
-<tr>
-	<td>
-		5
-	</td>
-</tr>
-<tr>
-	<td>
-		6
-	</td>
-</tr>
-<tr>
-	<td>
-		7
-	</td>
-</tr>
+	<tr>
+		<td>Apartado</td>
+		<td>Asignaciones</td>
+		<td>Estado</td>
+  	</tr>
+	<tr>
+		<td>1</td>
+		<td>Dani</td>
+		<td>Asignado</td>
+  	</tr>
+  	<tr>
+    		<td>2</td>
+	  	<td>Pedro</td>
+	  	<td>Asignado</td>
+  	</tr>
+  	<tr>
+    		<td>3</td>
+	  	<td>Silvia</td>
+	  	<td>Asignado</td>
+	</tr>
+	<tr>
+		<td>4</td>
+		<td>Marco</td>
+		<td>Asignado</td>
+	</tr>
+	<tr>
+		<td>5</td>
+	</tr>
+	<tr>
+		<td>6</td>
+	</tr>
+	<tr>
+		<td>7</td>
+	</tr>
 </table>
