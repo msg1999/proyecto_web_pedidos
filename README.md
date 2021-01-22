@@ -39,7 +39,7 @@
 	<tr>
 		<td>5-Consulta stock(linea producto)</td>
 		<td>Jorge</td>
-		<td>No asignado</td>
+		<td>Asignado</td>
 	</tr>
 	<tr>
 		<td>6-Consulta unidades totales</td>
