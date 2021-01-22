@@ -10,7 +10,7 @@ function obtenerAcceso($username, $password)  {
 	global $conexion;
 
 	try {
-		$obtenerID = $conexion->preprare("SELECT id FROM admin WHERE username = :username && passcode = :password");
+		$obtenerID = $conexion->prepare("SELECT id FROM admin WHERE username = :username AND passcode = :password");
 		$obtenerID->bindParam(":username", $username);
 		$obtenerID->bindParam(":password", $password);
 		$obtenerID->execute();
