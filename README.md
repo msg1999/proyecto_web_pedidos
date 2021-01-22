@@ -38,7 +38,7 @@
 	</tr>
 	<tr>
 		<td>5-Consulta stock(linea producto)</td>
-		<td>-</td>
+		<td>Jorge</td>
 		<td>No asignado</td>
 	</tr>
 	<tr>
