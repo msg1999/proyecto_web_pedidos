@@ -13,9 +13,9 @@ function obtenerAcceso($username, $password)  {
 		$obtenerID = $conexion->prepare("SELECT id FROM admin WHERE username = :username AND passcode = :password");
 		$obtenerID->bindParam(":username", $username);
 		$obtenerID->bindParam(":password", $password);
-		$obtenerID->execute(PDO::FETCH_ASSOC);
+		$obtenerID->execute();
 
-		return $obtenerID->fetch(PDO:);
+		return $obtenerID->fetch(PDO::FETCH_ASSOC);
 	} catch (PDOException $ex) {
 		echo "<strong>ERROR: </strong> ". $ex->getMessage();
 	}
