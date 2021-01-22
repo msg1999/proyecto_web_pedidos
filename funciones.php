@@ -13,13 +13,46 @@ function obtenerAcceso($username, $password)  {
 		$obtenerID = $conexion->preprare("SELECT id FROM admin WHERE username = :username && passcode = :password");
 		$obtenerID->bindParam(":username", $username);
 		$obtenerID->bindParam(":password", $password);
-		$obtenerID->execute(PDO::FETCH_ASSOC);
+		$obtenerID->execute();
 
-		return $obtenerID->fetch(PDO:);
+		return $obtenerID->fetch(PDO::FETCH_ASSOC);
 	} catch (PDOException $ex) {
 		echo "<strong>ERROR: </strong> ". $ex->getMessage();
 	}
 
 }
 
+
+
+function consultaProductLine()  {
+	// Jorge Blazquez Alvarez
+	// La función consulta todas las lineas de producto existentes
+	// Devuelve las lineas de producto en un array
+
+	global $conexion;
+
+	try {
+		$obtenerProdLine = $conexion->prepare("SELECT productLine FROM productLines");
+		$obtenerProdLine->execute();
+		return $obtenerProdLine->fetchAll(PDO::FETCH_ASSOC);
+	} catch (PDOException $ex) {
+		echo "<strong>ERROR: </strong> ". $ex->getMessage();
+	}
+}
+function consultaStock($productline)  {
+	// Jorge Blazquez Alvarez
+	// La función consulta todas las lineas de producto existentes
+	// Devuelve las lineas de producto en un array
+	global $conexion;
+
+	try {
+		$obtenerProd = $conexion->prepare("SELECT productName, quantityInStock FROM products WHERE productLine = :productLine ORDER BY quantityInStock DESC");
+		$obtenerProd->bindParam(":productLine", $productline);
+		$obtenerProd->execute();
+		return $obtenerProd->fetchAll(PDO::FETCH_ASSOC);
+	} catch (PDOException $ex) {
+		echo "<strong>ERROR: </strong> ". $ex->getMessage();
+	}
+
+}
 ?>
