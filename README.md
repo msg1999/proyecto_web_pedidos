@@ -44,7 +44,7 @@
 	<tr>
 		<td>6-Consulta unidades totales</td>
 		<td>-</td>
-		<td>No asignado</td>
+		<td>Dani</td>
 	</tr>
 	<tr>
 		<td>7-Consulta clientes</td>
