@@ -10,16 +10,35 @@ function obtenerAcceso($username, $password)  {
 	global $conexion;
 
 	try {
-		$obtenerID = $conexion->prepare("SELECT id FROM admin WHERE username = :username AND passcode = :password");
+		$obtenerID = $conexion->prepare("SELECT id FROM admin WHERE username = :username && passcode = :password");
 		$obtenerID->bindParam(":username", $username);
 		$obtenerID->bindParam(":password", $password);
 		$obtenerID->execute();
 
-		return $obtenerID->fetch(PDO::FETCH_ASSOC);
+		return $obtenerID->fetch(PDO::FETCH_ASSOC)["id"];
 	} catch (PDOException $ex) {
 		echo "<strong>ERROR: </strong> ". $ex->getMessage();
 	}
 
 }
 
-?>
+function consultarTotalVentas($fechaInicioBusqueda, $fechaFinBusqueda) {
+	// Daniel González Carretero
+	// La función consulta todas las ventas realizadas entre las fechas $fechaInicioBusqueda y $fechaFinBusqueda
+	// Devuelve un array con las compras realizadas, o NULL si ha habido algún error / no hay ventas entre esas fechas
+	
+	global $conexion;
+
+	try {
+		$obtenerVentas = $conexion->prepare("SELECT productName AS 'nombre', priceEach AS, COUNT(productName) AS 'unidades' FROM orderdetails LEFT JOIN products ON orderdetails.productcode = products.productcode LEFT JOIN orders ON orders.ordernumber = orderdetails.ordernumber WHERE orders.orderdate >= :fechaInicio AND orders.orderdate <= :fechaFin GROUP BY productName");
+		$obtenerVentas->bindParam(":fechaInicio", $fechaInicioBusqueda);
+		$obtenerVentas->bindParam(":fechaFin", $fechaFinBusqueda);
+		$obtenerVentas->execute();
+
+		return $obtenerVentas->fetchAll(PDO::FETCH_ASSOC);
+	} catch (PDOException $ex) {
+		return null;
+	}
+
+
+}
