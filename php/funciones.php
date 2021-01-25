@@ -4,8 +4,8 @@
 
     function get_productos(){
         // Dev by: Marco Santiago.
-	    // Function: La función obtiene los nombres de todos los productos.
-	    // Return: array de productos.
+	// Function: La función obtiene los nombres de todos los productos.
+	// Return: array de productos.
         global $conn;
 
         try{
@@ -21,7 +21,7 @@
 
     function get_stock($producto){
         // Dev by: Marco Santiago.
-	    // Function: La función obtiene el stock del producto seleccionado.
+	// Function: La función obtiene el stock del producto seleccionado.
         // Return: array de productos.
         global $conn;
 
