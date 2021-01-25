@@ -1,3 +1,4 @@
+<!--Daniel Gonzalez-->
 <?php 
 	session_start();
 

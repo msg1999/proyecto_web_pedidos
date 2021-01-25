@@ -5,9 +5,11 @@
 	$database = "pedidos";
 
 	try {
-		$conexion = new PDO("mysql:host=$servername;dbname=$database", $username, $password); 	 	 	 	 	 	
-		$conexion->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION); 	 	 	 	 	 	
+		$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password); 	 	 	 	 	 	
+        $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+        echo("OK"); 	 	 	 	
 	} catch (PDOException $ex) {
-		echo $ex->getMessage(); 	 	 	 	 	 	
+		echo $ex->getMessage();
 	}
+	
 ?>
