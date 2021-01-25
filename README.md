@@ -34,12 +34,12 @@
 	<tr>
 		<td>4-Consulta stock(producto)</td>
 		<td>Marco</td>
-		<td>Asignado</td>
+		<td>Finalizado</td>
 	</tr>
 	<tr>
 		<td>5-Consulta stock(linea producto)</td>
 		<td>Jorge</td>
-		<td>Asignado</td>
+		<td>Finalizado</td>
 	</tr>
 	<tr>
 		<td>6-Consulta unidades totales</td>
