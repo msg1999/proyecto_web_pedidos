@@ -28,7 +28,7 @@
   	</tr>
   	<tr>
     		<td>3-Consulta pedidos</td>
-	  	<td>Silvia</td>
+	  	<td>Silvia/Jorge</td>
 	  	<td>Asignado</td>
 	</tr>
 	<tr>
