@@ -103,5 +103,6 @@
 	} catch (PDOException $ex) {
 		return null;
 	}
+}
 
 ?>
