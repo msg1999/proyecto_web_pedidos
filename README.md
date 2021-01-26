@@ -48,7 +48,7 @@
 	</tr>
 	<tr>
 		<td>7-Consulta clientes</td>
-		<td>Dani</td>
+		<td>Jose/Dani</td>
 		<td>Asignado</td>
 	</tr>
 </table>
