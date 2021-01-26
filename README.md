@@ -24,7 +24,7 @@
   	<tr>
     		<td>2-Realizar pedidos</td>
 	  	<td>Pedro</td>
-	  	<td>Asignado</td>
+	  	<td>Finalizado</td>
   	</tr>
   	<tr>
     		<td>3-Consulta pedidos</td>
