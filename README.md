@@ -44,7 +44,7 @@
 	<tr>
 		<td>6-Consulta unidades totales</td>
 		<td>Dani</td>
-		<td>Asignado</td>
+		<td>Finalizado</td>
 	</tr>
 	<tr>
 		<td>7-Consulta clientes</td>
