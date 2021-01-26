@@ -51,6 +51,11 @@
 		<td>Jose/Dani</td>
 		<td>Asignado</td>
 	</tr>
+	<tr>
+		<td>Refactorizacion</td>
+		<td>Marco</td>
+		<td>Asignado</td>
+	</tr>
 </table>
 
 <h1>Normativas sobre el desarrollo</h1>
