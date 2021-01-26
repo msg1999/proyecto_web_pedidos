@@ -24,7 +24,7 @@
   	<tr>
     		<td>2-Realizar pedidos</td>
 	  	<td>Pedro</td>
-	  	<td>Finalizado</td>
+	  	<td>Finalizado/Revisar</td>
   	</tr>
   	<tr>
     		<td>3-Consulta pedidos</td>
@@ -48,8 +48,8 @@
 	</tr>
 	<tr>
 		<td>7-Consulta clientes</td>
-		<td>-</td>
-		<td>No asignado</td>
+		<td>Dani</td>
+		<td>Asignado</td>
 	</tr>
 </table>
 
