@@ -2,7 +2,7 @@
 <?php 
 	session_start();
 
-	if (isset($_POST) && !empty($_POST)) {
+	if (isset($_POST) && !empty($_POST) && !isset($_SESSION["idUsuario"])) {
 
 		include_once 'funciones.php';
 
@@ -13,7 +13,12 @@
 		} else {
 			$_SESSION["idUsuario"] = $idUsuario;
 		}
-
+		
+	}
+	
+	// 28/01/2021 -> Daniel González Carretero, a petición del cliente
+	if (isset($_SESSION["idUsuario"])) {
+		if (file_exists("pe_inicio.html")) header("location: pe_inicio.html");
 	}
 ?>
 <!DOCTYPE html>
