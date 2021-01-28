@@ -126,10 +126,10 @@
                         else{
     
                             // Vamos a añadir el pago a la tabla payments
-                            //$numerocliente = $_SESSION['cliente'];
+                            $numerocliente = $_SESSION['idUsuario'];
                             $cn = $_POST['checknumber'];
                             $fechahoy = getdate()['year']."-".getdate()['mon']."-".getdate()['mday'];
-                            $sqlpago = "INSERT INTO payments values ('1', '$cn', '$fechahoy', '$total')";
+                            $sqlpago = "INSERT INTO payments values ('$numerocliente', '$cn', '$fechahoy', '$total')";
                             $conn->exec($sqlpago);
                             echo "Pago realizado con éxito<br>";
     
@@ -147,8 +147,7 @@
                             }
     
                             // Vamos a incluir la compra en la tabla orders
-                            //$numerocliente = $_SESSION['cliente'];
-                            $sql2 = "INSERT into orders values('$n_order', '$fechahoy', '$fechahoy', null, 'Pendiente pago', null, '1')";
+                            $sql2 = "INSERT into orders values('$n_order', '$fechahoy', '$fechahoy', null, 'Pendiente pago', null, '$numerocliente')";
                             $conn->exec($sql2);
     
                             $cont = 1;
