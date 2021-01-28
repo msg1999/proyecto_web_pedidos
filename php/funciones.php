@@ -48,7 +48,7 @@
             $obtenerID->bindParam(":password", $password);
             $obtenerID->execute();
     
-            return $obtenerID->fetch(PDO::FETCH_ASSOC);
+            return $obtenerID->fetch(PDO::FETCH_ASSOC)["id"];
         } catch (PDOException $ex) {
             echo "<strong>ERROR: </strong> ". $ex->getMessage();
         }
