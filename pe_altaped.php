@@ -3,6 +3,9 @@
 <!-- Fragmento de PHP de sesión -->
 <?php
     session_start();
+    if (!isset($_SESSION["idUsuario"])) {
+      exit("No estas logeado");
+    }
 
     // Si el carrito no ha sido inicializando, lo creamos
     if (!isset($_SESSION['SHOPPING_CART']))
@@ -28,7 +31,7 @@
                         include "./conn.php";
                         include "./funciones.php";
 
-                        $productos = realizarConsulta($conexion, "SELECT productName from products where quantityInStock > 0");
+                        $productos = realizarConsulta($conn, "SELECT productName from products where quantityInStock > 0");
 
                         foreach($productos as $prods){
                             echo "<option value='".$prods['productName']."'>".$prods['productName']."</option>";
@@ -46,7 +49,7 @@
                 if (isset($_POST['anadir'])) {          
                     //Comprobamos que hay stock suficiente para añadir al carrito
                     $nombrep = $_POST['producto'];
-                    $cantidadp = realizarConsultaUnValor($conexion, "SELECT quantityInStock AS CANTIDAD FROM products WHERE productName = '$nombrep'");
+                    $cantidadp = realizarConsultaUnValor($conn, "SELECT quantityInStock AS CANTIDAD FROM products WHERE productName = '$nombrep'");
 
                     //En caso de que haya suficiente cantidad, añadimos el producto al carrito
                     if ($cantidadp > $_POST['cantidad']){
@@ -70,7 +73,7 @@
                         <th>Cantidad</th>
                     </tr>";
                     foreach ($_SESSION['SHOPPING_CART'] as $id => $cantidad) {
-                        $carr = realizarConsultaUnValor($conexion, "SELECT productName FROM products where productName = '$id'");
+                        $carr = realizarConsultaUnValor($conn, "SELECT productName FROM products where productName = '$id'");
                         echo   "<tr>
                                     <td>".$carr."</td>
                                     <td>".$cantidad."</td>
@@ -89,7 +92,7 @@
                 $total = 0;
                 foreach ($_SESSION['SHOPPING_CART'] as $n1 => $c1) {
                     // Consultamos el precio del producto
-                    $prod_price = realizarConsulta($conexion, "SELECT buyPrice as PRICE from products where productName = '$n1'");
+                    $prod_price = realizarConsulta($conn, "SELECT buyPrice as PRICE from products where productName = '$n1'");
                     foreach ($prod_price as $pp) {
                         $pprice = $pp['PRICE'];          // Precio del producto
                     }
@@ -111,7 +114,7 @@
                     $exp = '/[A-Z]{2}[0-9]{5}/'; // Expresión regular para el checkNumber
                     $repetido = false; // Boolean para comprobar que no esta repetido
                     if (preg_match($exp, $_POST['checknumber'])) {
-                        $consulta = realizarConsulta($conexion, "SELECT checkNumber as CN from payments");
+                        $consulta = realizarConsulta($conn, "SELECT checkNumber as CN from payments");
                         foreach ($consulta as $cons) {
                             if ($cons['CN'] == $_POST['checknumber']){
                                 $repetido = true;
@@ -127,17 +130,17 @@
                             $cn = $_POST['checknumber'];
                             $fechahoy = getdate()['year']."-".getdate()['mon']."-".getdate()['mday'];
                             $sqlpago = "INSERT INTO payments values ('1', '$cn', '$fechahoy', '$total')";
-                            $conexion->exec($sqlpago);
+                            $conn->exec($sqlpago);
                             echo "Pago realizado con éxito<br>";
     
                             // Con este foreach actualizamos el stock
                             foreach ($_SESSION['SHOPPING_CART'] as $id1 => $cantidad1) {
                                 $sql = "UPDATE products SET quantityInStock = (quantityInStock-$cantidad1) where productName = '$id1'";
-                                $conexion->exec($sql);
+                                $conn->exec($sql);
                             }
     
                             // Generamos el siguiente numero de orden
-                            $orders = realizarConsulta($conexion, "SELECT max(orderNumber) as MAX from orders");
+                            $orders = realizarConsulta($conn, "SELECT max(orderNumber) as MAX from orders");
                             
                             foreach ($orders as $o) {
                                 $n_order = $o['MAX']+1;
@@ -146,7 +149,7 @@
                             // Vamos a incluir la compra en la tabla orders
                             //$numerocliente = $_SESSION['cliente'];
                             $sql2 = "INSERT into orders values('$n_order', '$fechahoy', '$fechahoy', null, 'Pendiente pago', null, '1')";
-                            $conexion->exec($sql2);
+                            $conn->exec($sql2);
     
                             $cont = 1;
                             // Ahora incluiremos los datos de la compra en la tabla orderDetails
@@ -154,13 +157,13 @@
     
                                 // Aqui conseguimos el código de producto con el nombre
                                 // Contador para el Line Number
-                                $prod_code = realizarConsulta($conexion, "SELECT productCode as CODE from products where productName = '$name'");
+                                $prod_code = realizarConsulta($conn, "SELECT productCode as CODE from products where productName = '$name'");
                                 foreach ($prod_code as $p) {
                                     $pcode = $p['CODE'];          // Código del producto
                                 }
     
                                 // Aqui conseguimos el precio del producto
-                                $prod_price = realizarConsulta($conexion, "SELECT buyPrice as PRICE from products where productName = '$name'");
+                                $prod_price = realizarConsulta($conn, "SELECT buyPrice as PRICE from products where productName = '$name'");
                                 foreach ($prod_price as $pp) {
                                     $pprice = $pp['PRICE'];          // Precio del producto
                                 }
@@ -168,7 +171,7 @@
                                 
                                 // Hacemos la inserción en la tabla orderdetails
                                 $sql3 = "INSERT INTO orderdetails values ('$n_order', '$pcode', '$cantidad2', '$pprice', $cont)";
-                                $conexion->exec($sql3);
+                                $conn->exec($sql3);
     
                                 $cont = $cont+1;
                             }
