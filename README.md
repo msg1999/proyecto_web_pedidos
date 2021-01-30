@@ -49,7 +49,7 @@
 	<tr>
 		<td>7-Consulta clientes</td>
 		<td>Jose/Dani</td>
-		<td>Asignado</td>
+		<td>Finalizado</td>
 	</tr>
 	<tr>
 		<td>Refactorizacion</td>
