@@ -85,7 +85,7 @@
         }
 
     }
-	function consultarTotalVentas($fechaInicioBusqueda, $fechaFinBusqueda, $usuarioBusqueda) {
+    function consultarTotalVentas($fechaInicioBusqueda, $fechaFinBusqueda, $usuarioBusqueda) {
         // Dev by: Daniel González Carretero
         // Function: La función consulta todas las ventas realizadas por un usuario entre las fechas $fechaInicioBusqueda y $fechaFinBusqueda
         // Return: Devuelve un array con las compras realizadas, o NULL si ha habido algún error / no hay ventas entre esas fechas
