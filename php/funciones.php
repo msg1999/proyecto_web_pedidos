@@ -2,7 +2,7 @@
     //Code refactor by: Marco Santiago
     include_once('conn.php');
 
-	function get_productos(){
+    function get_productos(){
         // Dev by: Marco Santiago.
 	// Function: La función obtiene los nombres de todos los productos.
 	// Return: array de productos.
