@@ -1,46 +1,59 @@
-<?php 
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Consulta</title>
+		<meta charset="utf-8" />
+		<meta name="author" value="Silvia Ranera" />
+	</head>
+	<body>
 
-include_once 'conn.php';
+	<form method='post' action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>'>
+		<label for="customer">Cliente:</label>
+		<select name='customer' required>
+			<option selected disabled value="noSeleccionado">Selecciona un Cliente</option>
+			<?php
+				include_once 'funciones.php';
 
-function devolverCustomers() {
-	// Daniel González Carretero
-    // La función devuelve todos los Customers existentes en la tabla 'customers'
-    // Devuelve un array con los customers, o NULL si ha habido algún error
+				$customers = devolverCustomers();
+				foreach($customers as $customer) {
+                    echo "<option value='". $customer["customerNumber"] ."'>[". $customer["customerNumber"] ."]: ". $customer["customerName"] ."</option>";
+                }
+			?>
+		</select><br>
 
-	global $conn;
+		<input type="submit" name="submit" value="Consultar Pedidos" />
+	</form>
 
-	try {
-		$obtenerCustomers = $conn->prepare("SELECT customerNumber, customerName FROM customers");
-		$obtenerCustomers->execute();
+		<?php	
+			// Archivo de funciones ya incluído en la línea 15
 
-		return $obtenerCustomers->fetchAll(PDO::FETCH_ASSOC);
+			if (isset($_POST) && !empty($_POST) && $_POST["customer"] != "noSeleccionado" ) {
+				$customerNumber = $_POST["customer"];
 
-	} catch (PDOException $ex) {
-		echo "<strong>ERROR: </strong> ". $ex->getMessage();
-		return null;
-	}
-}
+				$orders = devolverOrders($customerNumber);
 
-function devolverOrders($customer) {
-	// Daniel González Carretero
-    // La función devuelve todos los pedidos (y su información) realizados por un customer
-    // Devuelve un array con los pedidos, o NULL si ha habido algún error / no hay pedidos de ese customer
+				if ($orders == null) {
+					echo "<p>No parece haber ningún pedido realizado por este cliente. Inténtalo de nuevo, quizá es error nuestro.</p>";
+				} else {
+					echo "<table border='1' cellspan='3'>";
+					foreach ($orders as $pedido) {
+						echo "<tr><td><p>";
+							echo "Pedido nº: <strong>". $pedido["orderNumber"] ."</strong> [". $pedido["orderDate"] ."] &nsbp;&nsbp;->&nsbp;&nsbp;<strong>". $pedido["status"];
 
-	global $conn;
+						echo "</p><p>";
+							echo "[<span>". $pedido["productName"] ."</span>], (". $pedido["priceEach"] ."€ x ". $pedido["quantityOrdered"]. "); Línea de Producto <span>". $pedido["orderLineNumber"] ."</span>";
 
-	try {
+						echo "</p></td></tr>";
 
-		$obtenerPedidos = $conn->prepare("SELECT orders.orderNumber AS 'orderNumber', orders.orderDate AS 'orderDate', orders.status AS 'status', orderdetails.orderLineNumber AS 'orderListNumber', orderdetails.quantityOrdered AS 'quantityOrdered', orderdetails.priceEach AS 'priceEach', products.productName AS 'productName' FROM orders LEFT JOIN orderdetails ON orders.orderNumber = orderdetails.orderNumber LEFT JOIN products ON orderdetails.productCode = products.productCode WHERE customerNumber = :customer ORDER BY orderdetails.orderLineNumber");
-		$obtenerPedidos->bindParam(":customer", $customer);
-		$obtenerPedidos->execute();
+					}
+					echo "</table>";
+				}
 
-		return $obtenerPedidos->fetchAll(PDO::FETCH_ASSOC);
+				
 
-	} catch (PDOException $ex) {
-		echo "<strong>ERROR: </strong> ". $ex->getMessage();
-		return null;
-	}
 
-}
-
-?>
+			}
+		?>	
+ 	</form>
+</body>
+</html>
