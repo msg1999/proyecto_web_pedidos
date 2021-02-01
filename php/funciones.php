@@ -95,7 +95,7 @@
             $obtenerVentas = $conn->prepare("SELECT productName AS 'nombre', priceEach AS 'precio', COUNT(productName) AS 'unidades' FROM orderdetails LEFT JOIN products ON orderdetails.productcode = products.productcode LEFT JOIN orders ON orders.ordernumber = orderdetails.ordernumber WHERE orders.orderdate >= :fechaInicio AND orders.orderdate <= :fechaFin AND orders.customernumber = :usuario GROUP BY productName");
             $obtenerVentas->bindParam(":fechaInicio", $fechaInicioBusqueda);
             $obtenerVentas->bindParam(":fechaFin", $fechaFinBusqueda);
-            $obtenerVentas->bindParam(":usuario", $usuarioBusqueda);
+            $obtenerVentas->bindParam(":usuario", $usuarioBusqueda['id']);
             $obtenerVentas->execute();
 
             return $obtenerVentas->fetchAll(PDO::FETCH_ASSOC);
