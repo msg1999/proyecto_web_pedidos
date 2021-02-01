@@ -175,7 +175,7 @@
         $obtenerVentas = $conn->prepare("SELECT paymentDate, amount FROM payments WHERE customerNumber = :usuario AND payments.paymentDate >= :fechaInicio AND payments.paymentDate <= :fechaFin");
         $obtenerVentas->bindParam(":fechaInicio", $fechaInicioBusqueda);
         $obtenerVentas->bindParam(":fechaFin", $fechaFinBusqueda);
-        $obtenerVentas->bindParam(":usuario", $usuarioBusqueda);
+        $obtenerVentas->bindParam(":usuario", $usuarioBusqueda['id']);
         $obtenerVentas->execute();
 
         return $obtenerVentas->fetchAll(PDO::FETCH_ASSOC);
