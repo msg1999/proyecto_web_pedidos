@@ -129,6 +129,7 @@
                             $numerocliente = $_SESSION['idUsuario'];
                             $cn = $_POST['checknumber'];
                             $fechahoy = getdate()['year']."-".getdate()['mon']."-".getdate()['mday'];
+                            $numerocliente=$numerocliente['id'];
                             $sqlpago = "INSERT INTO payments values ('$numerocliente', '$cn', '$fechahoy', '$total')";
                             $conn->exec($sqlpago);
                             echo "Pago realizado con éxito<br>";
