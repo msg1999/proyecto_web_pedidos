@@ -18,7 +18,7 @@
 	
 	// 28/01/2021 -> Daniel González Carretero, a petición del cliente
 	if (isset($_SESSION["idUsuario"])) {
-		if (file_exists("pe_inicio.html")) header("location: pe_inicio.html");
+		if (file_exists("pe_inicio.html")) header("location: ../index.php");
 	}
 ?>
 <!DOCTYPE html>
