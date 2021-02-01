@@ -41,7 +41,7 @@
 							echo "Pedido nº: <strong>". $pedido["orderNumber"] ."</strong> [". $pedido["orderDate"] ."] &nsbp;&nsbp;->&nsbp;&nsbp;<strong>". $pedido["status"];
 
 						echo "</p><p>";
-							echo "[<span>". $pedido["productName"] ."</span>], (". $pedido["priceEach"] ."€ x ". $pedido["quantityOrdered"]. "); Línea de Producto <span>". $pedido["orderLineNumber"] ."</span>";
+							echo "[<span>". $pedido["productName"] ."</span>], (". $pedido["priceEach"] ."€ x ". $pedido["quantityOrdered"]. "); Línea de Producto <span>". $pedido["orderListNumber"] ."</span>";
 
 						echo "</p></td></tr>";
 
