@@ -24,12 +24,12 @@
   	<tr>
     		<td>2-Realizar pedidos</td>
 	  	<td>Pedro</td>
-	  	<td>Finalizado/Revisar</td>
+	  	<td>Finalizado</td>
   	</tr>
   	<tr>
     		<td>3-Consulta pedidos</td>
 	  	<td>Silvia/Jorge</td>
-	  	<td>Asignado</td>
+	  	<td>Finalizado</td>
 	</tr>
 	<tr>
 		<td>4-Consulta stock(producto)</td>
@@ -54,7 +54,7 @@
 	<tr>
 		<td>Refactorizacion</td>
 		<td>Marco</td>
-		<td>Asignado</td>
+		<td>Finalizado</td>
 	</tr>
 </table>
 
