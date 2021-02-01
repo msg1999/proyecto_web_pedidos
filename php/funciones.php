@@ -125,9 +125,9 @@
     }
 
     function devolverCustomers() {
-	// Daniel González Carretero
-        // La función devuelve todos los Customers existentes en la tabla 'customers'
-        // Devuelve un array con los customers, o NULL si ha habido algún error
+	// Dev: Daniel González Carretero
+        // Ref: La función devuelve todos los Customers existentes en la tabla 'customers'
+        // Function: Devuelve un array con los customers, o NULL si ha habido algún error
 
 	global $conn;
 
@@ -144,9 +144,9 @@
      }
 
      function devolverOrders($customer) {
-         // Daniel González Carretero
-    	 // La función devuelve todos los pedidos (y su información) realizados por un customer
-         // Devuelve un array con los pedidos, o NULL si ha habido algún error / no hay pedidos de ese customer
+         // Dev: Daniel González Carretero
+    	 // Ref: La función devuelve todos los pedidos (y su información) realizados por un customer
+         // Function: Devuelve un array con los pedidos, o NULL si ha habido algún error / no hay pedidos de ese customer
 
 	global $conn;
 
@@ -165,9 +165,9 @@
 
       }
   function consultarTotalPagos($fechaInicioBusqueda, $fechaFinBusqueda, $usuarioBusqueda) {
-    // Daniel González Carretero
-    // La función consulta todos los pagos realizados entre las fechas $fechaInicioBusqueda y $fechaFinBusqueda
-    // Devuelve un array con los pagos realizados, o NULL si ha habido algún error / no hay pagos entre esas fechas
+    // Dev: Daniel González Carretero
+    // Ref: La función consulta todos los pagos realizados entre las fechas $fechaInicioBusqueda y $fechaFinBusqueda
+    // Function: Devuelve un array con los pagos realizados, o NULL si ha habido algún error / no hay pagos entre esas fechas
     
     global $conn;
 
