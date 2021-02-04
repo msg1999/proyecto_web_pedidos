@@ -30,5 +30,6 @@
                 echo "</table>";
             }
         ?>
+	<a href="../index.php">&lt;-Volver al menú inicial</a>
     </BODY>
 </HTML>
