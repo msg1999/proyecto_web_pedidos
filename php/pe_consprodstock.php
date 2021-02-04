@@ -37,5 +37,6 @@
                 }
             ?>
 		</form>
+	    <a href="../index.php">&lt;-Volver al menú inicial</a>
     </body>
 </html>
