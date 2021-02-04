@@ -152,7 +152,7 @@
 
 	try {
 
-		$obtenerPedidos = $conn->prepare("SELECT orders.orderNumber AS 'orderNumber', orders.orderDate AS 'orderDate', orders.status AS 'status', orderdetails.orderLineNumber AS 'orderListNumber', orderdetails.quantityOrdered AS 'quantityOrdered', orderdetails.priceEach AS 'priceEach', products.productName AS 'productName' FROM orders LEFT JOIN orderdetails ON orders.orderNumber = orderdetails.orderNumber LEFT JOIN products ON orderdetails.productCode = products.productCode WHERE customerNumber = :customer ORDER BY orderdetails.orderLineNumber");
+		$obtenerPedidos = $conn->prepare("SELECT orders.orderNumber AS 'orderNumber', orders.orderDate AS 'orderDate', orders.status AS 'status', orderdetails.orderLineNumber AS 'orderListNumber', orderdetails.quantityOrdered AS 'quantityOrdered', orderdetails.priceEach AS 'priceEach', products.productName AS 'productName' FROM orders LEFT JOIN orderdetails ON orders.orderNumber = orderdetails.orderNumber LEFT JOIN products ON orderdetails.productCode = products.productCode WHERE customerNumber = :customer ORDER BY orders.orderNumber DESC, orderdetails.orderLineNumber");
 		$obtenerPedidos->bindParam(":customer", $customer);
 		$obtenerPedidos->execute();
 
