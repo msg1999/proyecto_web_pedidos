@@ -30,6 +30,12 @@
                     <?php
                         include "./conn.php";
                         include "./funciones.php";
+                        
+                        
+                        // Si le damos al botón de Volver al Menú, nos devuleve al menñu principal (arreglado 05/02/2021 Pedro Fernández)
+                        if (isset($_POST['index'])) {
+                            header("location: ../index.php");
+                        }
 
                         $productos = realizarConsulta($conn, "SELECT productName from products where quantityInStock > 0");
 
@@ -42,51 +48,64 @@
                 Cantidad a comprar<input type="text" name="cantidad">
                 <br>
                 <button type="submit" name="anadir" value="anadir">Añadir Artículo</button>
-                <button type='submit' name='borrar' value='borrar'>Borrar Carrito</button><br><br>
+                <button type='submit' name='borrar' value='borrar'>Borrar Carrito</button>
+                <button type="submit" name="index" value="index">Volver al Menú</button><br> <!-- (arreglado 05/02/2021 Pedro Fernández) -->
             
 
-            <?php
+            <?php   
                 if (isset($_POST['anadir'])) {          
                     //Comprobamos que hay stock suficiente para añadir al carrito
                     $nombrep = $_POST['producto'];
                     $cantidadp = realizarConsultaUnValor($conn, "SELECT quantityInStock AS CANTIDAD FROM products WHERE productName = '$nombrep'");
 
-                    //En caso de que haya suficiente cantidad, añadimos el producto al carrito
-                    if ($cantidadp > $_POST['cantidad']){
-                        $_SESSION['SHOPPING_CART'][$_POST['producto']] = $_POST['cantidad'];
-                        echo "Producto añadido al carrito";
-                    } 
-                    else{
-                       echo "No hay suficiente stock";
+                    if (isset($_POST['anadir'])) {          
+                        //Comprobamos que hay stock suficiente para añadir al carrito
+                        $nombrep = $_POST['producto'];
+                        $cantidadp = realizarConsultaUnValor($conn, "SELECT quantityInStock AS CANTIDAD FROM products WHERE productName = '$nombrep'");
+    
+                        //En caso de que haya suficiente cantidad, añadimos el producto al carrito
+                        if ($cantidadp > $_POST['cantidad']){
+                            if (!isset($_SESSION['SHOPPING_CART'][$_POST['producto']])){    // Si el producto no esta en el carrito, lo añadimos y le asignamos la cantidad que introduca el usuario (arreglado 05/02/2021 Pedro Fernández)
+                                $_SESSION['SHOPPING_CART'][$_POST['producto']] = $_POST['cantidad'];
+                                echo "Producto añadido al carrito";
+                            }
+                            else{   // Si el producto existe en el carrito, le sumamos la cantidad que el usuario quiera a la cantidad que ya está guardada (arreglado 05/02/2021 Pedro Fernández)
+                                $_SESSION['SHOPPING_CART'][$_POST['producto']] = $_POST['cantidad'] + $_SESSION['SHOPPING_CART'][$_POST['producto']];
+                                echo "Producto añadido al carrito";
+                            }
+                        } 
+                        else{
+                           echo "No hay suficiente stock";
+                        }
                     }
-
-                    //Tabla del carrito
-                    echo "<br><br><table border='1'>";
-                    echo "<thead>
-                    <tr>
-                        <th colspan='2'>CARRITO DE COMPRA</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <th>Nombre del producto</th>
-                        <th>Cantidad</th>
-                    </tr>";
-                    foreach ($_SESSION['SHOPPING_CART'] as $id => $cantidad) {
-                        $carr = realizarConsultaUnValor($conn, "SELECT productName FROM products where productName = '$id'");
-                        echo   "<tr>
-                                    <td>".$carr."</td>
-                                    <td>".$cantidad."</td>
-                                </tr>";
-                    }
-                    echo "</tbody></table>";
-                    echo "<br>";
                 }
 
-                // Si le damos al boton de borrar, reinicia el array de la sesión y se vacía el carrito
+                // Si le damos al boton de borrar, reinicia el array de la sesión y se vacía el carrito (arreglado 05/02/2021 Pedro Fernández)
                 if (isset($_POST['borrar'])) {
                     $_SESSION['SHOPPING_CART'] = array();
                 }
+
+                //Tabla del carrito
+                echo "<br><br><table border='1'>";
+                echo "<thead>
+                <tr>
+                    <th colspan='2'>CARRITO DE COMPRA</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th>Nombre del producto</th>
+                    <th>Cantidad</th>
+                </tr>";
+                foreach ($_SESSION['SHOPPING_CART'] as $id => $cantidad) {
+                    $carr = realizarConsultaUnValor($conn, "SELECT productName FROM products where productName = '$id'");
+                    echo   "<tr>
+                                <td>".$carr."</td>
+                                <td>".$cantidad."</td>
+                            </tr>";
+                }
+                echo "</tbody></table>";
+                echo "<br>";
 
                 // Vamos a calcular el total de la compra
                 $total = 0;
@@ -108,7 +127,7 @@
             </form>
 
             <?php
-                // Si le damos al boton de comprar, comprobamos el checkNumber, reducimos el stock de los productos e incluimos la compra en las tablas correspondientes
+                // Si le damos al boton de comprar, comprobamos el checkNumber, reducimos el stock de los productos e incluimos la compra en las tablas correspondientes (arreglado 05/02/2021 Pedro Fernández)
                 if (isset($_POST['comprar'])) {
                     
                     $exp = '/[A-Z]{2}[0-9]{5}/'; // Expresión regular para el checkNumber
@@ -188,6 +207,5 @@
                 }
             ?>
         </div>
-        <a href="../index.php">&lt;-Volver al menú inicial</a>
     </body>
 </html>
