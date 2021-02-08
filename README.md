@@ -56,6 +56,11 @@
 		<td>Marco</td>
 		<td>Finalizado</td>
 	</tr>
+		<tr>
+		<td>Pago</td>
+		<td>Marco</td>
+		<td>Finalizado</td>
+	</tr>
 </table>
 
 <h1>Normativas sobre el desarrollo</h1>
