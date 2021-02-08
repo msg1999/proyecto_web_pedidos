@@ -8,6 +8,8 @@
 
 		$idUsuario = obtenerAcceso($_POST["username"], $_POST["password"]);
 
+		var_dump ($idUsuario);
+
 		if ($idUsuario == null) {
 			echo "<p style='color: red'>El nombre de usuario y contraseña no coinciden</p>";
 		} else {
