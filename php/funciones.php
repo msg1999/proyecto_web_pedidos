@@ -2,56 +2,21 @@
     //Code refactor by: Marco Santiago
     include_once('conn.php');
 
-
-    function obtenerAcceso($username, $password)  {
-        global $conn;
-    
-        $query="SELECT id FROM admin WHERE username = \"$username\" AND passcode = \"$password\"";
-        $obtenerID=$conn->query ($query);
-
-        return $obtenerID;
-
-    
-    }
-
-    function consultarTotalVentas($fechaInicioBusqueda, $fechaFinBusqueda, $usuarioBusqueda) {
-        global $conn;
-
-        echo ($fechaInicioBusqueda.$fechaFinBusqueda.$usuarioBusqueda);
-
-        #$query="SELECT productName AS 'nombre', priceEach AS 'precio', COUNT(productName) AS 'unidades' FROM orderdetails LEFT JOIN products ON orderdetails.productcode = products.productcode LEFT JOIN orders ON orders.ordernumber = orderdetails.ordernumber WHERE orders.orderdate >=  $fechaInicioBusqueda AND orders.orderdate <= $fechaFinBusqueda AND orders.customernumber = $usuarioBusqueda['id'] GROUP BY productName";
-        $query="SELECT productName AS 'nombre', priceEach AS 'precio', COUNT(productName) AS 'unidades' FROM orderdetails LEFT JOIN products ON orderdetails.productcode = products.productcode LEFT JOIN orders ON orders.ordernumber = orderdetails.ordernumber ";
-
-        $obtenerVentas=$conn->query($query);
-
-        return $obtenerVentas;
-
-}
-
-function realizarConsulta($conn, $query){
-    $query=$conn->query($query);
-
-    return $query;
-}
-
-function consultaStock($productline)  {
-    global $conn;
-
-    $query="SELECT productName, quantityInStock FROM products WHERE productLine = $productline ORDER BY quantityInStock DESC";
-    $query=$conn->query($query);
-
-    return $query;
-    
-
-}
-
     function get_productos(){
+        // Dev by: Marco Santiago.
+	// Function: La función obtiene los nombres de todos los productos.
+	// Return: array de productos.
         global $conn;
 
-        $query="SELECT * from products";
-        $query=$conn->query($query);
-
-        return $query;
+        try{
+            $products = $conn->query("SELECT * from products")->fetchAll(PDO::FETCH_ASSOC);
+            echo "Gen products succesfully<br>";
+            
+            return $products;
+        }
+        catch(Exception $e) {
+            echo("Error obtener productos -->".$e->getMessage()."</br>");
+        }
     }
 
     function get_stock($producto){
@@ -71,7 +36,24 @@ function consultaStock($productline)  {
 
     }
 
-
+    function obtenerAcceso($username, $password)  {
+        // Dev by: Daniel González Carretero
+        // Function: La función comprueba si existe un usuario $username con una contraseña $password
+        // Return: Devuelve el ID del usuario, si el usuario y contraseña son correctos, NULL si no lo son.
+        global $conn;
+    
+        try {
+            $obtenerID = $conn->prepare("SELECT id FROM admin WHERE username = :username AND passcode = :password");
+            $obtenerID->bindParam(":username", $username);
+            $obtenerID->bindParam(":password", $password);
+            $obtenerID->execute();
+    
+            return $obtenerID->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $ex) {
+            echo "<strong>ERROR: </strong> ". $ex->getMessage();
+        }
+    
+    }
 
     function consultaProductLine()  {
         // Dev by: Jorge Blazquez Alvarez
@@ -87,20 +69,78 @@ function consultaStock($productline)  {
             echo "<strong>ERROR: </strong> ". $ex->getMessage();
         }
     }
+    function consultaStock($productline)  {
+        // Dev by: Jorge Blazquez Alvarez
+        // Function: La función consulta todas las lineas de producto existentes
+        // Return: Devuelve las lineas de producto en un array
+        global $conn;
 
+        try {
+            $obtenerProd = $conn->prepare("SELECT productName, quantityInStock FROM products WHERE productLine = :productLine ORDER BY quantityInStock DESC");
+            $obtenerProd->bindParam(":productLine", $productline);
+            $obtenerProd->execute();
+            return $obtenerProd->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $ex) {
+            echo "<strong>ERROR: </strong> ". $ex->getMessage();
+        }
 
-    function realizarConsultaUnValor($conn, $query){
-        $selec=$conn->query($query);
+    }
+    function consultarTotalVentas($fechaInicioBusqueda, $fechaFinBusqueda, $usuarioBusqueda) {
+        // Dev by: Daniel González Carretero
+        // Function: La función consulta todas las ventas realizadas por un usuario entre las fechas $fechaInicioBusqueda y $fechaFinBusqueda
+        // Return: Devuelve un array con las compras realizadas, o NULL si ha habido algún error / no hay ventas entre esas fechas
+        global $conn;
+
+        try {
+            $obtenerVentas = $conn->prepare("SELECT productName AS 'nombre', priceEach AS 'precio', COUNT(productName) AS 'unidades' FROM orderdetails LEFT JOIN products ON orderdetails.productcode = products.productcode LEFT JOIN orders ON orders.ordernumber = orderdetails.ordernumber WHERE orders.orderdate >= :fechaInicio AND orders.orderdate <= :fechaFin AND orders.customernumber = :usuario GROUP BY productName");
+            $obtenerVentas->bindParam(":fechaInicio", $fechaInicioBusqueda);
+            $obtenerVentas->bindParam(":fechaFin", $fechaFinBusqueda);
+            $obtenerVentas->bindParam(":usuario", $usuarioBusqueda['id']);
+            $obtenerVentas->execute();
+
+            return $obtenerVentas->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $ex) {
+            return null;
+        }
+    }
+    function realizarConsulta($conn, $consulta){
+        // Dev by: Pedro Fernandez
+        // Ref: Marco Santiago
+        // Function: La función consulta todas las ventas realizadas por un usuario entre las fechas $fechaInicioBusqueda y $fechaFinBusqueda
+        // Return: Devuelve un array con las compras realizadas, o NULL si ha habido algún error / no hay ventas entre esas fechas
+        $con = $conn->prepare($consulta);
+        $con->execute();
+        $select=$con->fetchAll(PDO::FETCH_ASSOC);
+        return $select;
+    }
+    function realizarConsultaUnValor($conn, $consulta){
+        // Dev: Pedro Fernandez
+        // Ref: Marco Santiago
+        // Function: Ejecuta un select y devuelve el resultado
+        // Return: $selec, el valor de la consulta
+        $con = $conn->prepare($consulta);
+        $con->execute();
+        $selec=$con->fetchColumn();
         return $selec;
     }
 
     function devolverCustomers() {
-	    global $conn;
+	// Dev: Daniel González Carretero
+        // Ref: La función devuelve todos los Customers existentes en la tabla 'customers'
+        // Function: Devuelve un array con los customers, o NULL si ha habido algún error
 
-		$query="SELECT customerNumber, customerName FROM customers";
-        $query=$conn->query($query);
-    
-        return $query;
+	global $conn;
+
+	try {
+		$obtenerCustomers = $conn->prepare("SELECT customerNumber, customerName FROM customers");
+		$obtenerCustomers->execute();
+
+		return $obtenerCustomers->fetchAll(PDO::FETCH_ASSOC);
+
+	} catch (PDOException $ex) {
+		echo "<strong>ERROR: </strong> ". $ex->getMessage();
+		return null;
+	}
      }
 
      function devolverOrders($customer) {
@@ -142,88 +182,6 @@ function consultaStock($productline)  {
     } catch (PDOException $ex) {
         return null;
     }
-}
-
-function comprar(){
-                    // Si le damos al boton de comprar, comprobamos el checkNumber, reducimos el stock de los productos e incluimos la compra en las tablas correspondientes (arreglado 05/02/2021 Pedro Fernández)
-                if (isset($_POST['comprar'])) {
-                    
-                    $exp = '/[A-Z]{2}[0-9]{5}/'; // Expresión regular para el checkNumber
-                    $repetido = false; // Boolean para comprobar que no esta repetido
-                    if (preg_match($exp, $_POST['checknumber'])) {
-                        $consulta = realizarConsulta($conn, "SELECT checkNumber as CN from payments");
-                        foreach ($consulta as $cons) {
-                            if ($cons['CN'] == $_POST['checknumber']){
-                                $repetido = true;
-                            }
-                        }
-                        if ($repetido){
-                            echo "El Check Number introducido esta repetido";
-                        }
-                        else{
-                            
-                            // Vamos a añadir el pago a la tabla payments
-                            $numerocliente = $_SESSION['idUsuario'];
-                            $cn = $_POST['checknumber'];
-                            $fechahoy = getdate()['year']."-".getdate()['mon']."-".getdate()['mday'];
-                            $numerocliente=$numerocliente['id'];
-                            $sqlpago = "INSERT INTO payments values ('$numerocliente', '$cn', '$fechahoy', '$total')";
-                            $conn->exec($sqlpago);
-                            echo "Pago realizado con éxito<br>";
-    
-                            // Con este foreach actualizamos el stock
-                            foreach ($_SESSION['SHOPPING_CART'] as $id1 => $cantidad1) {
-                                $sql = "UPDATE products SET quantityInStock = (quantityInStock-$cantidad1) where productName = '$id1'";
-                                $conn->exec($sql);
-                            }
-    
-                            // Generamos el siguiente numero de orden
-                            $orders = realizarConsulta($conn, "SELECT max(orderNumber) as MAX from orders");
-                            
-                            foreach ($orders as $o) {
-                                $n_order = $o['MAX']+1;
-                            }
-    
-                            // Vamos a incluir la compra en la tabla orders
-                            $sql2 = "INSERT into orders values('$n_order', '$fechahoy', '$fechahoy', null, 'Pendiente pago', null, '$numerocliente')";
-                            $conn->exec($sql2);
-    
-                            $cont = 1;
-                            // Ahora incluiremos los datos de la compra en la tabla orderDetails
-
-                            foreach ($_SESSION['SHOPPING_CART'] as $name => $cantidad2) {
-    
-                                // Aqui conseguimos el código de producto con el nombre
-                                // Contador para el Line Number
-                                $prod_code = realizarConsulta($conn, "SELECT productCode as CODE from products where productName = '$name'");
-                                foreach ($prod_code as $p) {
-                                    $pcode = $p['CODE'];          // Código del producto
-                                }
-    
-                                // Aqui conseguimos el precio del producto
-                                $prod_price = realizarConsulta($conn, "SELECT buyPrice as PRICE from products where productName = '$name'");
-                                foreach ($prod_price as $pp) {
-                                    $pprice = $pp['PRICE'];          // Precio del producto
-                                }
-    
-                                
-                                // Hacemos la inserción en la tabla orderdetails
-                                $sql3 = "INSERT INTO orderdetails values ('$n_order', '$pcode', '$cantidad2', '$pprice', $cont)";
-                                $conn->exec($sql3);
-    
-                                $cont = $cont+1;
-                            }
-    
-                            echo "Compra realizada con éxito";
-
-                            $_SESSION['SHOPPING_CART'] = array();       // Reiniciamos el carrito
-                        }
-                    }
-                    else{
-                        echo "El Check Number introducido es erróneo (Formato: AA99999)";
-                    }
-                    
-                }
 }
 
 ?>
